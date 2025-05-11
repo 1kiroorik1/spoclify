@@ -257,6 +257,16 @@ const popularRadio = [
     title: 'Draganov',
     description: 'With Inkonnu, Madd and more',
     imageUrl: 'https://i.scdn.co/image/ab67706f0000000365ccfcbe1cd68d3aef15c1e4'
+  },
+  {
+    title: 'Rap Marocaine',
+    description: 'Les meilleurs titres du rap marocain',
+    imageUrl: 'https://i.scdn.co/image/ab67706f000000034528347181893f144e58d8f0'
+  },
+  {
+    title: 'Raï Zone',
+    description: 'Top hits raï et music algérienne',
+    imageUrl: 'https://i.scdn.co/image/ab67706f000000030c848d0d7f5c546aaf298d2c'
   }
 ]
 
@@ -285,6 +295,22 @@ const popularArtists = [
   {
     name: 'Balti',
     imageUrl: 'https://i.scdn.co/image/ab6761610000e5eb7df8485bfbd002b94de48d5a'
+  },
+  {
+    name: 'L7or',
+    imageUrl: 'https://i.scdn.co/image/ab6761610000e5eb39f9fe6f7efc19c467fb4d3d'
+  },
+  {
+    name: 'Tagne',
+    imageUrl: 'https://i.scdn.co/image/ab6761610000e5eb4fc4e348e3e9b73fb964ed0f'
+  },
+  {
+    name: 'Inkonnu',
+    imageUrl: 'https://i.scdn.co/image/ab6761610000e5eba992a275f4c26b4e15dc8ea6'
+  },
+  {
+    name: 'Small X',
+    imageUrl: 'https://i.scdn.co/image/ab6761610000e5eb17e33ce2274cd0ef69aabe9a'
   }
 ]
 
@@ -319,8 +345,98 @@ const popularAlbums = [
     title: 'Versus',
     artist: 'Vitaa & Slimane',
     imageUrl: 'https://i.scdn.co/image/ab67616d0000b273a6badbf930c1747923c50a93'
+  },
+  {
+    title: 'Afrique du Nord Vol. 2',
+    artist: 'DJ Snake',
+    imageUrl: 'https://i.scdn.co/image/ab67616d0000b273e12add05dcab464fc5a3310d'
+  },
+  {
+    title: 'Favela',
+    artist: 'L7or',
+    imageUrl: 'https://i.scdn.co/image/ab67616d0000b273e1ef7d5eac14729239e24db6'
+  },
+  {
+    title: 'Nouvo Mode',
+    artist: 'ElGrandeToto',
+    imageUrl: 'https://i.scdn.co/image/ab67616d0000b27308049fc1ed57bc4ad1923cf8'
+  },
+  {
+    title: 'Espoir',
+    artist: 'Inkonnu',
+    imageUrl: 'https://i.scdn.co/image/ab67616d0000b2735fdd5ef640e033c219ee8d08'
   }
 ]
+
+// Mock data for Recently Played if API returns nothing
+const mockRecentlyPlayed = [
+  {
+    track: {
+      id: 'track1',
+      name: 'Vida Loca',
+      uri: 'spotify:track:7KuiPIuWy1PjYoK5N6nSBt',
+      artists: [{ name: 'Soolking' }, { name: 'Indila' }],
+      album: {
+        images: [{ url: 'https://i.scdn.co/image/ab67616d0000b273fcab4d9ca6e7561e5312e478' }]
+      }
+    }
+  },
+  {
+    track: {
+      id: 'track2',
+      name: 'Guerilla',
+      uri: 'spotify:track:1RDvyOk5tRd1QiKGY8JUOE',
+      artists: [{ name: 'El Grande Toto' }],
+      album: {
+        images: [{ url: 'https://i.scdn.co/image/ab67616d0000b2738620c5d3e22465f4c04e4f65' }]
+      }
+    }
+  },
+  {
+    track: {
+      id: 'track3',
+      name: 'Bella',
+      uri: 'spotify:track:3RN6CuQQ9PlFYZpAMRQ6Y6',
+      artists: [{ name: 'Maître Gims' }],
+      album: {
+        images: [{ url: 'https://i.scdn.co/image/ab67616d0000b2731a1d451dfcd868e4c03bdbf2' }]
+      }
+    }
+  },
+  {
+    track: {
+      id: 'track4',
+      name: 'Jaloux',
+      uri: 'spotify:track:2NHtAJhXVICZGjBYTK53IO',
+      artists: [{ name: 'Dadju' }],
+      album: {
+        images: [{ url: 'https://i.scdn.co/image/ab67616d0000b2731eee4c2789dca54f6e34399e' }]
+      }
+    }
+  },
+  {
+    track: {
+      id: 'track5',
+      name: 'Hayati',
+      uri: 'spotify:track:7L7rmujrtzP4sCabB086rE',
+      artists: [{ name: 'Balti' }, { name: 'Hamouda' }],
+      album: {
+        images: [{ url: 'https://i.scdn.co/image/ab67616d0000b273e6d2e48ee7cbe57283d1a969' }]
+      }
+    }
+  },
+  {
+    track: {
+      id: 'track6',
+      name: 'Halla Halla',
+      uri: 'spotify:track:2ZOizJ0S0EgLjXIZUPSZRQ',
+      artists: [{ name: 'Small X' }, { name: 'ElGrandeToto' }],
+      album: {
+        images: [{ url: 'https://i.scdn.co/image/ab67616d0000b2736f55bb276aca4f96ab2fc52b' }]
+      }
+    }
+  }
+];
 
 // Check authentication status
 const checkAuth = () => {
@@ -329,7 +445,10 @@ const checkAuth = () => {
 
 // Fetch recently played tracks
 const fetchRecentlyPlayed = async () => {
-  if (!accessToken.value) return
+  if (!accessToken.value) {
+    recentlyPlayed.value = mockRecentlyPlayed;
+    return;
+  }
 
   try {
     const response = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=12', {
@@ -347,27 +466,32 @@ const fetchRecentlyPlayed = async () => {
       // Gérer la réponse vide pour éviter l'erreur JSON
       const text = await response.text()
       if (!text) {
-        recentlyPlayed.value = []
+        recentlyPlayed.value = mockRecentlyPlayed;
         return
       }
       
       const errorData = JSON.parse(text)
       console.error('Recently played API error:', errorData)
-      throw new Error(`Failed to fetch recently played tracks: ${response.status} - ${errorData.error?.message || 'Unknown error'}`)
+      recentlyPlayed.value = mockRecentlyPlayed;
+      return;
     }
     
     // Gérer la réponse vide pour éviter l'erreur JSON
     const text = await response.text()
     if (!text) {
-      recentlyPlayed.value = []
+      recentlyPlayed.value = mockRecentlyPlayed;
       return
     }
     
     const data = JSON.parse(text)
-    recentlyPlayed.value = data.items || []
+    if (data.items && data.items.length > 0) {
+      recentlyPlayed.value = data.items
+    } else {
+      recentlyPlayed.value = mockRecentlyPlayed;
+    }
   } catch (error) {
     console.error('Error fetching recently played:', error)
-    recentlyPlayed.value = []
+    recentlyPlayed.value = mockRecentlyPlayed;
   }
 }
 
