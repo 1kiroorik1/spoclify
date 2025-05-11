@@ -106,7 +106,7 @@ body {
 }
 
 .card-inner {
-  @apply bg-gradient-to-br from-gray-800/40 to-gray-900/80 p-4 rounded-lg transition-all duration-300 cursor-pointer group relative shadow-lg border border-gray-800/50;
+  @apply bg-gradient-to-br from-gray-800/40 to-gray-900/80 p-4 rounded-lg transition-all duration-300 cursor-pointer relative shadow-lg border border-gray-800/50;
 }
 
 /* Effet de zoom sur les images */
