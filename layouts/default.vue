@@ -1,58 +1,83 @@
 <template>
   <div class="min-h-screen bg-black text-white">
     <!-- Sidebar -->
-    <div class="fixed top-0 left-0 w-64 h-full bg-[#121212] p-6">
+    <div class="fixed top-0 left-0 w-64 h-full bg-gradient-to-b from-gray-900 to-[#121212] p-6 shadow-xl z-50 transition-all duration-300">
       <div class="mb-8">
-        <NuxtLink to="/" class="block">
-          <svg class="w-32 hover:opacity-80 transition-opacity" viewBox="0 0 1134 340" xmlns="http://www.w3.org/2000/svg">
+        <NuxtLink to="/" class="block animate-fadeIn">
+          <svg class="w-32 hover:text-green-400 transition-all duration-300 transform hover:scale-105" viewBox="0 0 1134 340" xmlns="http://www.w3.org/2000/svg">
             <path fill="currentColor" d="M8 171c0 92 76 168 168 168s168-76 168-168S268 4 176 4 8 79 8 171zm230 78c-39-24-89-30-147-17-14 2-16-18-4-20 64-15 118-8 162 19 11 7 0 24-11 18zm17-45c-45-28-114-36-167-20-17 5-23-21-7-25 61-18 136-9 188 23 14 9 0 31-14 22zM80 133c-17 6-28-23-9-30 59-18 159-15 221 22 17 9 1 37-17 27-32-19-76-28-141-27-42 1-48 8-54 8zm189 91c-16 0-33-7-33-20 0-12 17-20 33-20 16 0 33 8 33 20 0 13-17 20-33 20zm-111-41c-9 3-18-9-9-13 49-14 163-10 205 17 11 7-1 22-12 14-40-26-144-21-184-18z" />
           </svg>
         </NuxtLink>
       </div>
       <nav class="space-y-6">
-        <NuxtLink to="/" class="flex items-center space-x-4 text-gray-400 hover:text-white transition-colors">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <NuxtLink to="/" class="nav-link group">
+          <div class="absolute h-8 w-1 bg-green-500 rounded-r-full opacity-0 -left-6 transform scale-y-0 group-hover:scale-y-75 group-hover:opacity-50 transition-all duration-300" :class="{ '!opacity-100 !scale-y-100': $route.path === '/' }"></div>
+          <svg class="w-6 h-6 transform group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
           </svg>
-          <span>Home</span>
+          <span class="font-medium">Home</span>
         </NuxtLink>
-        <NuxtLink to="/search" class="flex items-center space-x-4 text-gray-400 hover:text-white transition-colors">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <NuxtLink to="/search" class="nav-link group">
+          <div class="absolute h-8 w-1 bg-green-500 rounded-r-full opacity-0 -left-6 transform scale-y-0 group-hover:scale-y-75 group-hover:opacity-50 transition-all duration-300" :class="{ '!opacity-100 !scale-y-100': $route.path === '/search' }"></div>
+          <svg class="w-6 h-6 transform group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
             <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
           </svg>
-          <span>Search</span>
+          <span class="font-medium">Search</span>
         </NuxtLink>
-        <NuxtLink to="/playlists" class="flex items-center space-x-4 text-gray-400 hover:text-white transition-colors">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <NuxtLink to="/playlists" class="nav-link group">
+          <div class="absolute h-8 w-1 bg-green-500 rounded-r-full opacity-0 -left-6 transform scale-y-0 group-hover:scale-y-75 group-hover:opacity-50 transition-all duration-300" :class="{ '!opacity-100 !scale-y-100': $route.path.includes('/playlists') }"></div>
+          <svg class="w-6 h-6 transform group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
             <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM10 9h8v2h-8zm0 3h4v2h-4z"/>
           </svg>
-          <span>Your Library</span>
+          <span class="font-medium">Your Library</span>
         </NuxtLink>
-        <NuxtLink to="/profile" class="flex items-center space-x-4 text-gray-400 hover:text-white transition-colors">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-          </svg>
-          <span>Profile</span>
-        </NuxtLink>
+        <div class="border-t border-gray-800/50 my-4 pt-4">
+          <h3 class="text-xs uppercase text-gray-500 font-bold mb-4 tracking-wider">Your Playlists</h3>
+          <div class="space-y-3 max-h-[30vh] overflow-y-auto pr-2 scrollbar-hide">
+            <a href="#" v-for="i in 6" :key="i" class="flex items-center space-x-3 text-gray-400 hover:text-white transition-colors py-1 group">
+              <div class="w-10 h-10 bg-gradient-to-br from-gray-700/80 to-gray-900/80 shadow rounded overflow-hidden flex-shrink-0"></div>
+              <div>
+                <p class="text-sm font-medium group-hover:text-green-400 transition-colors">Playlist {{ i }}</p>
+                <p class="text-xs text-gray-500">14 tracks</p>
+              </div>
+            </a>
+          </div>
+        </div>
       </nav>
     </div>
 
     <!-- Main Content -->
     <div class="ml-64">
       <!-- Top Navigation Bar -->
-      <div class="sticky top-0 z-10 bg-black/80 backdrop-blur-md p-4 flex items-center justify-between">
-        <NavigationButtons />
-        <div v-if="isAuthenticated()" class="flex items-center space-x-4">
-          <button @click="logout" class="text-gray-400 hover:text-white transition-colors">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+      <div class="sticky top-0 z-10 bg-gradient-to-b from-black/90 via-black/70 to-transparent backdrop-blur-xl p-4 flex items-center justify-between transition-all duration-300">
+        <div class="flex items-center space-x-4">
+          <button class="rounded-full p-2 bg-black/50 text-white hover:bg-black/80 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+          </button>
+          <button class="rounded-full p-2 bg-black/50 text-white hover:bg-black/80 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </button>
+        </div>
+        <div v-if="isAuthenticated()" class="flex items-center space-x-3">
+          <button class="btn-spotify text-sm py-1.5 px-5">
+            <span>Upgrade</span>
+          </button>
+          <button @click="logout" class="flex items-center space-x-2 bg-black/50 rounded-full py-1 pl-1 pr-3 hover:bg-gray-800 transition-colors">
+            <div class="w-7 h-7 rounded-full bg-green-600 flex items-center justify-center text-xs font-bold">U</div>
+            <span class="text-sm font-medium">User</span>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z"/>
             </svg>
           </button>
         </div>
       </div>
 
       <!-- Page Content -->
-      <div class="p-8">
+      <div>
         <slot />
       </div>
     </div>
@@ -134,5 +159,22 @@ const {
 <style>
 .router-link-active {
   @apply text-white;
+}
+
+.nav-link {
+  @apply flex items-center space-x-4 text-gray-400 hover:text-white transition-colors relative py-2 px-2 rounded-md hover:bg-white/5;
+}
+
+.router-link-active {
+  @apply bg-white/10 text-white font-semibold;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style> 
