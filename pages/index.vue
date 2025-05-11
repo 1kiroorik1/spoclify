@@ -25,7 +25,7 @@
     </div>
 
     <!-- Content for authenticated users -->
-    <div v-else class="pb-32">
+    <div v-else class="pb-32 bg-gradient-to-b from-gray-900 via-black to-black">
       <!-- Category filters -->
       <div class="p-6 pt-4 flex space-x-2 overflow-x-auto scrollbar-hide sticky top-0 z-10 bg-black/80 backdrop-blur-md">
         <button class="bg-white text-black px-6 py-2 rounded-full font-semibold">All</button>
@@ -42,17 +42,19 @@
         
         <div class="grid grid-flow-col auto-cols-max gap-6 overflow-x-auto pb-6 scrollbar-hide">
           <div v-for="(radio, index) in popularRadio" :key="index" class="w-48">
-            <div class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer group relative">
-              <img :src="radio.imageUrl" :alt="radio.title" class="w-full aspect-square object-cover rounded-lg mb-4">
-              <div class="absolute bottom-20 right-5 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button class="bg-green-500 rounded-full p-3 shadow-lg">
-                  <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5.14v14l11-7-11-7z"/>
-                  </svg>
-                </button>
+            <div class="bg-gray-800/40 hover:bg-gray-700/60 p-4 rounded-lg transition-all duration-300 cursor-pointer group relative">
+              <div class="relative mb-4">
+                <img :src="radio.imageUrl" :alt="radio.title" class="w-full aspect-square object-cover rounded-lg shadow-md">
+                <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transform group-hover:translate-y-0 translate-y-4 transition-all duration-300">
+                  <button class="bg-green-500 rounded-full p-3 shadow-lg hover:scale-105 hover:bg-green-400 transition-all">
+                    <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5.14v14l11-7-11-7z"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
               <h3 class="font-bold text-base">{{ radio.title }}</h3>
-              <p class="text-sm text-gray-400 line-clamp-2">{{ radio.description }}</p>
+              <p class="text-sm text-gray-400 line-clamp-2 mt-1">{{ radio.description }}</p>
             </div>
           </div>
         </div>
@@ -67,14 +69,16 @@
         
         <div class="grid grid-flow-col auto-cols-max gap-6 overflow-x-auto pb-6 scrollbar-hide">
           <div v-for="(artist, index) in popularArtists" :key="index" class="w-48">
-            <div class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer group relative">
-              <img :src="artist.imageUrl" :alt="artist.name" class="w-full aspect-square object-cover rounded-full mb-4">
-              <div class="absolute bottom-20 right-5 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button class="bg-green-500 rounded-full p-3 shadow-lg">
-                  <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5.14v14l11-7-11-7z"/>
-                  </svg>
-                </button>
+            <div class="bg-gray-800/40 hover:bg-gray-700/60 p-4 rounded-lg transition-all duration-300 cursor-pointer group relative">
+              <div class="relative mb-4">
+                <img :src="artist.imageUrl" :alt="artist.name" class="w-full aspect-square object-cover rounded-full shadow-md">
+                <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transform group-hover:translate-y-0 translate-y-4 transition-all duration-300">
+                  <button class="bg-green-500 rounded-full p-3 shadow-lg hover:scale-105 hover:bg-green-400 transition-all">
+                    <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5.14v14l11-7-11-7z"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
               <h3 class="font-bold text-base text-center">{{ artist.name }}</h3>
               <p class="text-sm text-gray-400 text-center">Artist</p>
@@ -92,17 +96,19 @@
         
         <div class="grid grid-flow-col auto-cols-max gap-6 overflow-x-auto pb-6 scrollbar-hide">
           <div v-for="(album, index) in popularAlbums" :key="index" class="w-48">
-            <div class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer group relative">
-              <img :src="album.imageUrl" :alt="album.title" class="w-full aspect-square object-cover rounded-lg mb-4">
-              <div class="absolute bottom-20 right-5 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button class="bg-green-500 rounded-full p-3 shadow-lg">
-                  <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5.14v14l11-7-11-7z"/>
-                  </svg>
-                </button>
+            <div class="bg-gray-800/40 hover:bg-gray-700/60 p-4 rounded-lg transition-all duration-300 cursor-pointer group relative">
+              <div class="relative mb-4">
+                <img :src="album.imageUrl" :alt="album.title" class="w-full aspect-square object-cover rounded-lg shadow-md">
+                <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transform group-hover:translate-y-0 translate-y-4 transition-all duration-300">
+                  <button class="bg-green-500 rounded-full p-3 shadow-lg hover:scale-105 hover:bg-green-400 transition-all">
+                    <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5.14v14l11-7-11-7z"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
               <h3 class="font-bold text-base">{{ album.title }}</h3>
-              <p class="text-sm text-gray-400">{{ album.artist }}</p>
+              <p class="text-sm text-gray-400 mt-1">{{ album.artist }}</p>
             </div>
           </div>
         </div>
@@ -117,24 +123,26 @@
         
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           <div v-for="item in recentlyPlayed" :key="item.track.id" 
-            class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer group relative"
+            class="bg-gray-800/40 hover:bg-gray-700/60 p-4 rounded-lg transition-all duration-300 cursor-pointer group relative"
             @click="playTrack(item.track.uri)"
           >
-            <img 
-              v-if="item.track.album?.images?.[0]?.url" 
-              :src="item.track.album.images[0].url" 
-              :alt="item.track.name"
-              class="w-full aspect-square object-cover rounded-lg mb-4"
-            />
-            <div class="absolute bottom-20 right-5 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button class="bg-green-500 rounded-full p-3 shadow-lg">
-                <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5.14v14l11-7-11-7z"/>
-                </svg>
-              </button>
+            <div class="relative mb-4">
+              <img 
+                v-if="item.track.album?.images?.[0]?.url" 
+                :src="item.track.album.images[0].url" 
+                :alt="item.track.name"
+                class="w-full aspect-square object-cover rounded-lg shadow-md"
+              />
+              <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transform group-hover:translate-y-0 translate-y-4 transition-all duration-300">
+                <button class="bg-green-500 rounded-full p-3 shadow-lg hover:scale-105 hover:bg-green-400 transition-all">
+                  <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5.14v14l11-7-11-7z"/>
+                  </svg>
+                </button>
+              </div>
             </div>
             <h3 class="font-bold text-base truncate">{{ item.track.name }}</h3>
-            <p class="text-sm text-gray-400 truncate">{{ item.track.artists.map(artist => artist.name).join(', ') }}</p>
+            <p class="text-sm text-gray-400 truncate mt-1">{{ item.track.artists.map(artist => artist.name).join(', ') }}</p>
           </div>
         </div>
       </section>
@@ -223,32 +231,32 @@ const popularRadio = [
   {
     title: 'Cheb Hasni',
     description: 'With Cheb Akil, Khaled, Cheb Mami and more',
-    imageUrl: 'https://source.unsplash.com/random/300x300?music,artist'
+    imageUrl: 'https://i.scdn.co/image/ab67706f00000003e58f8fec296c59cf7721ded4'
   },
   {
     title: 'Lbenj',
     description: 'With Ayoub Anbaoui, Duke, Mocci and more',
-    imageUrl: 'https://source.unsplash.com/random/300x300?music,rap'
+    imageUrl: 'https://i.scdn.co/image/ab67706f00000003f02346e5f0712aeb1a3b3853'
   },
   {
     title: 'Bilel Tacchini',
     description: 'With Cheb Hichem TGV, Bilel Tacchini, Cheba Warda and more',
-    imageUrl: 'https://source.unsplash.com/random/300x300?music,dj'
+    imageUrl: 'https://i.scdn.co/image/ab67706f000000039249b35f23fb596b6f006a15'
   },
   {
     title: 'Cheba Warda',
     description: 'With Cheb Hichem TGV, Didou Parisien, Cheba Warda and more',
-    imageUrl: 'https://source.unsplash.com/random/300x300?music,vocal'
+    imageUrl: 'https://i.scdn.co/image/ab67706f000000036874c4f1b4edc18de1c2f3ee'
   },
   {
     title: 'Cheb Bilal',
     description: 'With Cheb Akil, Cheb Azzedine, Reda Taliani and more',
-    imageUrl: 'https://source.unsplash.com/random/300x300?music,singer'
+    imageUrl: 'https://i.scdn.co/image/ab67706f00000003ab18a8851f18efc38e954f41'
   },
   {
     title: 'Draganov',
     description: 'With Inkonnu, Madd and more',
-    imageUrl: 'https://source.unsplash.com/random/300x300?music,band'
+    imageUrl: 'https://i.scdn.co/image/ab67706f0000000365ccfcbe1cd68d3aef15c1e4'
   }
 ]
 
@@ -256,27 +264,27 @@ const popularRadio = [
 const popularArtists = [
   {
     name: 'Soolking',
-    imageUrl: 'https://source.unsplash.com/random/300x300?singer,man'
+    imageUrl: 'https://i.scdn.co/image/ab6761610000e5eb2df22a9d60c6cc58b5068eca'
   },
   {
     name: 'El Grande Toto',
-    imageUrl: 'https://source.unsplash.com/random/300x300?rapper,man'
+    imageUrl: 'https://i.scdn.co/image/ab6761610000e5ebad81f868a8fa6cdd52d8a2a1'
   },
   {
     name: 'Cheb Bachir',
-    imageUrl: 'https://source.unsplash.com/random/300x300?singer,arab'
+    imageUrl: 'https://i.scdn.co/image/ab6761610000e5eb5cc4c73a3b25062c6a0f3ed8'
   },
   {
     name: 'Draganov',
-    imageUrl: 'https://source.unsplash.com/random/300x300?rapper,mask'
+    imageUrl: 'https://i.scdn.co/image/ab6761610000e5ebe008da8c038293e50daf1926'
   },
   {
     name: 'Didine Canon 16',
-    imageUrl: 'https://source.unsplash.com/random/300x300?singer,cap'
+    imageUrl: 'https://i.scdn.co/image/ab6761610000e5eb2b1b213c6b35e5c48db2a13d'
   },
   {
     name: 'Balti',
-    imageUrl: 'https://source.unsplash.com/random/300x300?arab,artist'
+    imageUrl: 'https://i.scdn.co/image/ab6761610000e5eb7df8485bfbd002b94de48d5a'
   }
 ]
 
@@ -285,32 +293,32 @@ const popularAlbums = [
   {
     title: 'Sans Visa',
     artist: 'Soolking',
-    imageUrl: 'https://source.unsplash.com/random/300x300?album,cover'
+    imageUrl: 'https://i.scdn.co/image/ab67616d0000b273063d3b53582d3bd1cf780bd5'
   },
   {
     title: 'Caméléon',
     artist: 'El Grande Toto',
-    imageUrl: 'https://source.unsplash.com/random/300x300?album,art'
+    imageUrl: 'https://i.scdn.co/image/ab67616d0000b2738620c5d3e22465f4c04e4f65'
   },
   {
     title: 'Cameleon',
     artist: 'Maître Gims',
-    imageUrl: 'https://source.unsplash.com/random/300x300?album,modern'
+    imageUrl: 'https://i.scdn.co/image/ab67616d0000b2731a1d451dfcd868e4c03bdbf2'
   },
   {
     title: 'Légendaire',
     artist: 'Dadju',
-    imageUrl: 'https://source.unsplash.com/random/300x300?album,urban'
+    imageUrl: 'https://i.scdn.co/image/ab67616d0000b2731eee4c2789dca54f6e34399e'
   },
   {
     title: 'Paradise',
     artist: 'Soolking',
-    imageUrl: 'https://source.unsplash.com/random/300x300?album,color'
+    imageUrl: 'https://i.scdn.co/image/ab67616d0000b273fcab4d9ca6e7561e5312e478'
   },
   {
     title: 'Versus',
     artist: 'Vitaa & Slimane',
-    imageUrl: 'https://source.unsplash.com/random/300x300?album,minimal'
+    imageUrl: 'https://i.scdn.co/image/ab67616d0000b273a6badbf930c1747923c50a93'
   }
 ]
 
