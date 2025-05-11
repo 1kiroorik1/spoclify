@@ -1,4 +1,5 @@
 import { ref, watch } from 'vue'
+import { useRuntimeConfig, useNuxtApp } from '#imports'
 
 interface SpotifyArtist {
   name: string
@@ -59,7 +60,13 @@ export const useSpotifyPlayback = () => {
         throw new Error(data.error_description || data.error || 'Failed to fetch from Spotify')
       }
 
-      return response.json()
+      // Vérifier si la réponse est vide
+      const text = await response.text()
+      if (!text) {
+        return null
+      }
+      
+      return JSON.parse(text)
     } catch (err) {
       console.error('Error in fetchWithAuth:', err)
       return null

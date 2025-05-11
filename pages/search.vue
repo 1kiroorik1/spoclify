@@ -14,6 +14,14 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </div>
+      
+      <!-- Message d'erreur -->
+      <div v-if="error" class="mt-4 bg-red-900/70 text-white p-3 rounded-lg flex items-center">
+        <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>{{ error }}</span>
+      </div>
     </div>
 
     <!-- Loading State -->
@@ -23,7 +31,8 @@
 
     <!-- Search Results -->
     <div v-else-if="searchQuery" class="p-8">
-      <!-- User Profiles -->
+      <!-- User Profiles - Section cachée car l'API ne prend pas en charge la recherche d'utilisateurs -->
+      <!-- 
       <div v-if="displayedUsers.length > 0" class="mb-12">
         <div class="flex justify-between items-center mb-6">
           <h2 class="text-2xl font-bold">User Profiles</h2>
@@ -54,6 +63,7 @@
           </div>
         </div>
       </div>
+      -->
 
       <!-- Tracks -->
       <div v-if="displayedTracks.length > 0" class="mb-12">
@@ -176,7 +186,7 @@
       </div>
 
       <!-- No Results -->
-      <div v-if="!isLoading && !displayedTracks.length && !displayedArtists.length && !displayedAlbums.length && !displayedPlaylists.length && !displayedUsers.length" 
+      <div v-if="!isLoading && !displayedTracks.length && !displayedArtists.length && !displayedAlbums.length && !displayedPlaylists.length" 
         class="text-center text-gray-400 py-12"
       >
         No results found for "{{ searchQuery }}"
@@ -266,20 +276,35 @@ const handleSearch = async () => {
     return
   }
 
+  // Vérifier si le token est disponible
+  if (!accessToken.value) {
+    console.error('Pas de token d\'accès disponible')
+    resetResults()
+    return
+  }
+
   isLoading.value = true
   try {
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery.value)}&type=track,artist,album,playlist,user&limit=20`, {
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery.value)}&type=track,artist,album,playlist&limit=20`, {
       headers: {
-        'Authorization': `Bearer ${accessToken.value}`
+        'Authorization': `Bearer ${accessToken.value}`,
+        'Content-Type': 'application/json'
       }
     })
 
     if (!response.ok) {
       if (response.status === 401) {
-        await refreshAccessToken()
-        return handleSearch()
+        // Tenter de rafraîchir le token
+        const success = await refreshAccessToken()
+        if (success) {
+          return handleSearch()
+        } else {
+          throw new Error('Impossible de rafraîchir le token d\'accès')
+        }
       }
-      throw new Error('Search failed')
+      
+      const errorData = await response.json().catch(() => null)
+      throw new Error(errorData?.error?.message || `La recherche a échoué avec le statut: ${response.status}`)
     }
 
     const data = await response.json()
@@ -289,12 +314,16 @@ const handleSearch = async () => {
     artists.value = data.artists?.items || []
     albums.value = data.albums?.items || []
     playlists.value = data.playlists?.items || []
-    users.value = data.users?.items || []
+    // L'API Spotify ne prend pas en charge la recherche d'utilisateurs
+    users.value = []
 
     // Update displayed items
     updateDisplayedItems()
   } catch (error) {
-    console.error('Search error:', error)
+    console.error('Erreur de recherche:', error)
+    resetResults()
+    // Ne pas propager l'erreur pour éviter les avertissements non gérés
+    error.value = error.message
   } finally {
     isLoading.value = false
   }
